@@ -2,11 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!-- 采购的映射文件 -->
-<mapper namespace="com.qf.shop.dao.IGoodsDao">
+<mapper namespace="com.qf.dao.IGoodsDao">
 
-    <select id="queryAll" resultType="goods">
+    <select id="queryall" resultType="goods">
         select * from goods
     </select>
 
+    <insert id="goodsadd" useGeneratedKeys="true" keyColumn="id">
+        insert into goods value(null,#{title},#{ginfo},#{gcount},#{tid},#{allprice},#{price},null)
+    </insert>
+
+    <!-- 查找最新上架的四个商品 -->
+    <select id="querygoodsnew" resultType="goods">
+        select * from goods order by id limit 4
+    </select>
 </mapper>
 

@@ -7,4 +7,8 @@ import java.util.List;
 public interface IGoodsService {
 
     List<Goods> queryall();
+
+    int goodsadd(Goods goods);
+
+    List<Goods> querygoodsnew();
 }

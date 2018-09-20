@@ -1,5 +1,5 @@
 server:
-  port: 8085
+  port: 8080
 dubbo:
   application:
     name: shop_back
@@ -7,7 +7,7 @@ dubbo:
     address: zookeeper://192.168.131.128:2181
   consumer:
     check: false
-    timeout: 1000
+    timeout: 2000
 spring:
   thymeleaf:
     cache: false

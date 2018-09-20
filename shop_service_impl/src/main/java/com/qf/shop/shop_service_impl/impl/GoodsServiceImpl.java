@@ -1,4 +1,4 @@
-package com.qf.shop.service.impl;
+package com.qf.shop.shop_service_impl.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.qf.dao.IGoodsDao;
@@ -17,5 +17,15 @@ public class GoodsServiceImpl implements IGoodsService {
     @Override
     public List<Goods> queryall() {
         return goodsDao.queryall();
+    }
+
+    @Override
+    public int goodsadd(Goods goods) {
+        return goodsDao.goodsadd(goods);
+    }
+
+    @Override
+    public List<Goods> querygoodsnew() {
+        return goodsDao.querygoodsnew();
     }
 }
