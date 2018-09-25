@@ -28,4 +28,20 @@ public class GoodsServiceImpl implements IGoodsService {
     public List<Goods> querygoodsnew() {
         return goodsDao.querygoodsnew();
     }
+
+    @Override
+    public int goodsdel(Integer id) {
+        return goodsDao.goodsdel(id);
+    }
+
+    @Override
+    public int goodsedit(Goods goods) {
+        System.out.println(goods);
+        return goodsDao.goodsedit(goods);
+    }
+
+    @Override
+    public Goods goodsqueryone(Integer id) {
+        return goodsDao.goodsqueryone(id);
+    }
 }

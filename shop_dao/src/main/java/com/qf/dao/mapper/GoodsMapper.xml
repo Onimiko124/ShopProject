@@ -9,12 +9,24 @@
     </select>
 
     <insert id="goodsadd" useGeneratedKeys="true" keyColumn="id">
-        insert into goods value(null,#{title},#{ginfo},#{gcount},#{tid},#{allprice},#{price},null)
+        insert into goods value(null,#{title},#{ginfo},#{gcount},#{tid},#{allprice},#{price},#{gimage})
     </insert>
 
     <!-- 查找最新上架的四个商品 -->
     <select id="querygoodsnew" resultType="goods">
         select * from goods order by id limit 4
+    </select>
+
+    <delete id="goodsdel">
+        delete from goods where id = #{id}
+    </delete>
+
+    <update id="goodsedit">
+        update goods set title=#{title},ginfo=#{ginfo},gcount=#{gcount},tid=#{tid},allprice=#{allprice},price=#{price},gimage=#{gimage} where id=#{id}
+    </update>
+
+    <select id="goodsqueryone" resultType="goods">
+        select * from goods where id = #{id}
     </select>
 </mapper>
 

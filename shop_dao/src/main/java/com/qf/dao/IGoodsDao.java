@@ -11,4 +11,10 @@ public interface IGoodsDao {
     int goodsadd(Goods goods);
 
     List<Goods> querygoodsnew();
+
+    int goodsdel(Integer id);
+
+    int goodsedit(Goods goods);
+
+    Goods goodsqueryone(Integer id);
 }
