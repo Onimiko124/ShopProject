@@ -8,7 +8,7 @@
         select * from goods
     </select>
 
-    <insert id="goodsadd" useGeneratedKeys="true" keyColumn="id">
+    <insert id="goodsadd" useGeneratedKeys="true" keyProperty="id">
         insert into goods value(null,#{title},#{ginfo},#{gcount},#{tid},#{allprice},#{price},#{gimage})
     </insert>
 

@@ -8,7 +8,7 @@ public interface IGoodsService {
 
     List<Goods> queryall();
 
-    int goodsadd(Goods goods);
+    Goods goodsadd(Goods goods);
 
     List<Goods> querygoodsnew();
 

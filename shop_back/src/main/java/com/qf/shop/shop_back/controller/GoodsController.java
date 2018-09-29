@@ -3,8 +3,10 @@ package com.qf.shop.shop_back.controller;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.github.tobato.fastdfs.domain.StorePath;
 import com.github.tobato.fastdfs.service.FastFileStorageClient;
+import com.google.gson.Gson;
 import com.qf.entity.Goods;
 import com.qf.service.IGoodsService;
+import com.qf.service.util.HttpClientUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -75,8 +77,22 @@ public class GoodsController {
             goods.setTid(1);
         }
 
-        int goodsadd = goodsService.goodsadd(goods);
-        goods.setId(goodsadd);
+        goods = goodsService.goodsadd(goods);
+        System.out.println("添加后id为-->" + goods.getId());
+        /**
+         每次添加商品，都要同步到solr的索引库中
+         调用索引工程的方法添加到索引库
+          */
+        String info = HttpClientUtil.sendJsonPOST("http://localhost:8082/solr/add", new Gson().toJson(goods));
+        System.out.println("发送请求---->请求体" + info);
+
+        /**
+         * 每次添加完商品，为商品添加一个单独的页面
+         * 通过详情工程(item)创建独立的页面
+         */
+        HttpClientUtil.sendJsonPOST("http://localhost:8083/item/createhtml",new Gson().toJson(goods));
+
+
         return "redirect:/goods/goodslist";
     }
 
