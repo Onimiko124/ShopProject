@@ -5,18 +5,22 @@ import com.google.gson.Gson;
 import com.qf.entity.ResultData;
 import com.qf.entity.User;
 import com.qf.service.IUserService;
-import com.qf.service.util.Constact;
+import com.qf.util.Constact;
+import com.qf.util.HttpClientUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
@@ -31,7 +35,9 @@ public class SSOController {
     private IUserService userService;
 
     @RequestMapping("/tologin")
-    public String tologin(){
+    public String tologin(Model model,String returnUrl){
+        // 在申请跳转登录页面前，把当前的请求路径转发到登录页面
+        model.addAttribute("returnUrl",returnUrl);
         return "login";
     }
 
@@ -40,10 +46,16 @@ public class SSOController {
      * @return
      */
     @RequestMapping("/login")
-    public String login(String username,String password, HttpServletResponse response,Model model){
+    public String login(String username,
+                        String password,
+                        HttpServletResponse response,
+                        Model model,
+                        String returnUrl,
+                        @CookieValue(value = "cart_token", required = false)String cart_token){
         User user = userService.login(username);
         ResultData<User> data = new ResultData<>();
         if(user != null) {
+            data.setData(user);
             System.out.println(user);
             // 判断password是否正确
             if(user.getPassword().equals(password)){
@@ -57,9 +69,43 @@ public class SSOController {
                 // 存放到Redis当中
                 redisTemplate.opsForValue().set(uuid, user);
                 redisTemplate.expire(uuid, 7, TimeUnit.DAYS);
+
+                // 登录成功后，进行购物车的合并
+                if(cart_token != null) {
+                    System.out.println("sso工程开始进行对购物车的合并");
+                    System.out.println("sso工程的购物车信息-->" + cart_token);
+                    HashMap<String, String> params = new HashMap<>();
+                    params.put("uid",data.getData().getId() +"");
+                    // 创建请求头的数据
+                    Map<String,String> header = new HashMap<>();
+                    try {
+                        header.put("Cookie", "cart_token=" + URLEncoder.encode(cart_token,"utf-8"));
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
+
+                    String result = HttpClientUtil.sendPostParamsAndHeader("http://localhost:8086/cart/merge", params, header);
+                    System.out.println(result);
+                    // 合并购物车完毕后，清空cookie中的临时购物车
+                    if(result.equals("succ")) {
+                        // 返回的字符串为succ时，表示购物车合并成功
+                        Cookie cookie1 = new Cookie(Constact.CART_TOKEN,null);
+                        cookie1.setMaxAge(0);
+                        cookie1.setPath("/");
+                        response.addCookie(cookie1);
+                    }
+                }
+
                 System.out.println("登录成功!");
+               // System.out.println(returnUrl);   true
+                // 登录成功后，判断请求路径是否为空，如果不为空，返回到跳转登录页面前的页面
+                if(returnUrl != null && !"".equals(returnUrl)) {
+                    returnUrl.replace("*","&");
+                } else {
+                    returnUrl = "http://localhost:8085";
+                }
                 // 跳转到前台首页
-                return "redirect:http://localhost:8085";
+                return "redirect:" + returnUrl;
             } else {
                 // 密码不匹配时
                 data.setCode(2);

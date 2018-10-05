@@ -12,25 +12,10 @@
     <script type="text/javascript" src="js/topNav.js"></script>
     <script type="text/javascript" src="js/focus.js"></script>
     <script type="text/javascript" src="js/shop_home_tab.js"></script>
+    <script type="text/javascript" src="http://localhost:8084/js/login.js"></script>
 </head>
 <body>
 <!-- Header  -wll-2013/03/24 -->
-<script>
-    $(function () {
-        // 判断是否已经登录，如果已经登录则显示用户的信息
-        $.ajax({
-            url: "http://localhost:8084/sso/islogin",
-            dataType:"jsonp"
-        });
-    })
-
-    function callback(data) {
-        alert(data)
-        if(data!=null){
-            $("#pid").html(data.name + "您好，欢迎来到<b><a href=\"/\">ShopCZ商城</a></b>[<a href=\"http://localhost:8084/sso/logout\">注销</a>])");
-        }
-    }
-</script>
 <div class="shop_hd">
     <!-- Header TopNav -->
     <div class="shop_hd_topNav">
@@ -73,8 +58,9 @@
 
                     <li>
                         <div class="topNav_menu">
-                            <a href="#" class="topNavHover">购物车<b>0</b>种商品<i></i></a>
-                            <div class="topNav_menu_bd" style="display:none;">
+                            <!-- 点击购物车时，展示该所有的购物车信息 -->
+                            <a id="querycart" href="http://localhost:8086/cart/cartlist" class="topNavHover">购物车<b id="cnumber">0</b>种商品<i></i></a>
+                            <div id="cartsid" class="topNav_menu_bd" style="display:none;">
                                 <!--
                                 <ul>
                                   <li><a title="已售出的商品" target="_top" href="#">已售出的商品</a></li>
@@ -85,6 +71,32 @@
                             </div>
                         </div>
                     </li>
+
+                    <script type="text/javascript">
+                        $(function(){
+                            $.ajax({
+                                url:"http://localhost:8086/cart/getCart",
+                                dataType:"jsonp"
+                            });
+                        })
+
+                        // 服务器返回的跨域数据
+                        function getCart(data) {
+                            $("#cnumber").html(data.length);
+
+                            var html = "<ul>";
+                            // 拼接购物车的数据信息
+                            for(var i=0;i<data.length;i++) {
+                                html += "<li><p>";
+                                html += "<img width='50' height='30' src='http://192.168.131.128/" + data[i].goods.gimage +"'/>";
+                                html += "<span>" + data[i].goods.title + "</span>"
+                                html +="</p></li>";
+                            }
+                            html += "</ul>";
+                            $("#cartsid").html(html);
+                            alert(html)
+                        }
+                    </script>
 
                     <li>
                         <div class="topNav_menu">
@@ -126,10 +138,10 @@
             <div class="clear"></div>
             <div class="search_form">
                 <!-- 点击搜索后，到搜索工程中进行solr索引库的查询 -->
-                <form method="post" action="http://localhost:8082/solr/query">
+                <form method="get" action="http://localhost:8082/solr/query">
                     <div class="search_formstyle">
                         <input type="text" class="search_form_text" name="keyword" placeholder="搜索其实很简单！"/>
-                        <input type="submit" class="search_form_sub" name="secrch_submit" value="" title="搜索"/>
+                        <input type="submit" class="search_form_sub" value="" title="搜索"/>
                     </div>
                 </form>
             </div>

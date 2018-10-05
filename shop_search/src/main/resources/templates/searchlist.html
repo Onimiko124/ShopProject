@@ -11,6 +11,7 @@
     <script type="text/javascript" src="js/jquery.js" ></script>
     <script type="text/javascript" src="js/topNav.js" ></script>
     <script type="text/javascript" src="js/shop_list.js" ></script>
+    <script type="text/javascript" src="http://localhost:8084/js/login.js"></script>
 </head>
 <body>
 <!-- Header  -wll-2013/03/24 -->
@@ -20,7 +21,7 @@
         <div class="shop_hd_topNav_all">
             <!-- Header TopNav Left -->
             <div class="shop_hd_topNav_all_left">
-                <p>您好，欢迎来到<b><a href="/">ShoopNC商城</a></b>[<a href="">登录</a>][<a href="">注册</a>]</p>
+                <p id="pid">您好，欢迎来到<b><a href="/">ShoopNC商城</a></b>[<a href="">登录</a>][<a href="">注册</a>]</p>
             </div>
             <!-- Header TopNav Left End -->
 
@@ -106,8 +107,8 @@
             <div class="search_form">
                 <form method="post" action="index.php">
                     <div class="search_formstyle">
-                        <input type="text" class="search_form_text" name="search_content" value="搜索其实很简单！" />
-                        <input type="submit" class="search_form_sub" name="secrch_submit" value="" title="搜索" />
+                        <input type="text" class="search_form_text" name="keyword" value="搜索其实很简单！" />
+                        <input type="submit" class="search_form_sub" th:href="${#request.getContextPath() + '/solr/query'}" name="secrch_submit" value="" title="搜索" />
                     </div>
                 </form>
             </div>
@@ -381,7 +382,7 @@
                         <!-- 点击商品后，跳转到商品详细信息的页面 -->
                         <!--<dt><a th:href="${'http://localhost:8083/page' + good.id + '.html'}"></a>-->
                         <dt>
-                            <a th:href="${'http://localhost:8083/page' + good.id + '.html'}"><img th:src="${'http://192.168.131.128/' + good.gimage}" width="200" height="200"></a>
+                            <a th:href="${'http://localhost:8083/page/' + good.id + '.html'}"><img th:src="${'http://192.168.131.128/' + good.gimage}" width="200" height="200"></a>
                         </dt>
                         <dd class="title"><a th:utext="${good.title}">OCIAIZO春装水洗做旧短外套复古磨白短款牛仔外套春01C1417</a></dd>
                         <dd class="content">

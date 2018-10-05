@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
@@ -55,5 +56,17 @@ public class ItemController {
             }
         }
         return null;
+    }
+
+    @RequestMapping("/delByid")
+    public void delByid(@RequestBody String id){
+        String path = this.getClass().getResource("/").getPath() + "static/page/" + id + ".html";
+        System.out.println(path);
+        File file = new File(path);
+        if(file.exists()){
+            file.delete();
+        } else {
+            System.out.println("删除失败，文件不存在");
+        }
     }
 }

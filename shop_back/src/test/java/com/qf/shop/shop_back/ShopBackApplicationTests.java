@@ -1,5 +1,6 @@
 package com.qf.shop.shop_back;
 
+import com.google.gson.Gson;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;

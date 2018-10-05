@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 采购的映射文件 -->
+<mapper namespace="com.qf.dao.IAddressDao">
+
+    <select id="queryAddress" resultType="address">
+          select * from address where uid = #{uid}
+    </select>
+
+    <insert id="addAddress" useGeneratedKeys="true" keyProperty="id">
+        insert into address value(null,#{person},#{address},#{phone},#{code},#{uid},#{isdefault})
+    </insert>
+
+</mapper>
+

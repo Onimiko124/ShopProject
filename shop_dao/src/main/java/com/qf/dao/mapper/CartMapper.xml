@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 采购的映射文件 -->
+<mapper namespace="com.qf.dao.ICartDao">
+
+    <select id="queryCartByuid" resultType="cart">
+--     查询该用户的所有购物车信息
+          select * from shopcart where uid = #{uid}
+    </select>
+
+    <insert id="addCart" useGeneratedKeys="true" keyProperty="id">
+        insert into shopcart value(null,#{gid},#{gnumber},#{uid})
+    </insert>
+
+    <delete id="delCart">
+--     根据购物车的id删除购物车
+        delete from shopcart where id = #{id}
+    </delete>
+
+    <delete id="delCartByuid">
+--         根据用户的id删除所有对应的购物车数据
+        delete from shopcart where uid = #{uid}
+    </delete>
+
+    <select id="queryCartByUidAndGids" resultType="cart">
+--         根据用户和商品id搜索所有对应的购物车信息
+          select * from shopcart where uid = #{uid} and gid in
+          <foreach collection="gid" item="gid2" open="(" close=")" separator=",">
+              #{gid2}
+          </foreach>
+    </select>
+
+</mapper>
+

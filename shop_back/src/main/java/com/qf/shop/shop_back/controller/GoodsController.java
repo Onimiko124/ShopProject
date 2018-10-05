@@ -6,7 +6,7 @@ import com.github.tobato.fastdfs.service.FastFileStorageClient;
 import com.google.gson.Gson;
 import com.qf.entity.Goods;
 import com.qf.service.IGoodsService;
-import com.qf.service.util.HttpClientUtil;
+import com.qf.util.HttpClientUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -42,6 +42,13 @@ public class GoodsController {
     @RequestMapping("/goodsdel/{id}")
     public String goodsdel(@PathVariable Integer id){
         goodsService.goodsdel(id);
+
+        // 删除商品的同时，对应的把索引库的该商品内容删除 true
+        HttpClientUtil.sendJsonPOST("http://localhost:8082/solr/delByid",id +"");
+
+        // 删除商品的同时，对应的详情静态页面也删除  true
+        HttpClientUtil.sendJsonPOST("http://localhost:8083/item/delByid", id +"");
+
         return "redirect:/goods/goodslist";
     }
 

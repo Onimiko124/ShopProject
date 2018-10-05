@@ -1,17 +1,19 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
     <base href="${context}/resource/"/>
-    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
     <title>商品详细页面</title>
-    <link rel="stylesheet" href="css/base.css" type="text/css" />
-    <link rel="stylesheet" href="css/shop_common.css" type="text/css" />
-    <link rel="stylesheet" href="css/shop_header.css" type="text/css" />
-    <link rel="stylesheet" href="css/shop_list.css" type="text/css" />
-    <link rel="stylesheet" href="css/shop_goods.css" type="text/css" />
-    <script type="text/javascript" src="js/jquery.js" ></script>
-    <script type="text/javascript" src="js/topNav.js" ></script>
-    <script type="text/javascript" src="js/shop_goods.js" ></script>
+    <link rel="stylesheet" href="css/base.css" type="text/css"/>
+    <link rel="stylesheet" href="css/shop_common.css" type="text/css"/>
+    <link rel="stylesheet" href="css/shop_header.css" type="text/css"/>
+    <link rel="stylesheet" href="css/shop_list.css" type="text/css"/>
+    <link rel="stylesheet" href="css/shop_goods.css" type="text/css"/>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/topNav.js"></script>
+    <script type="text/javascript" src="js/shop_goods.js"></script>
+    <script type="text/javascript" src="http://localhost:8084/js/login.js"></script>
 </head>
 <body>
 <!-- Header  -wll-2013/03/24 -->
@@ -21,7 +23,7 @@
         <div class="shop_hd_topNav_all">
             <!-- Header TopNav Left -->
             <div class="shop_hd_topNav_all_left">
-                <p>您好，欢迎来到<b><a href="/">ShoopNC商城</a></b>[<a href="">登录</a>][<a href="">注册</a>]</p>
+                <p id="pid">您好，欢迎来到<b><a href="/">ShoopNC商城</a></b>[<a href="">登录</a>][<a href="">注册</a>]</p>
             </div>
             <!-- Header TopNav Left End -->
 
@@ -32,7 +34,7 @@
                     <li>
                         <div class="topNav_menu">
                             <a href="#" class="topNavHover">我的商城<i></i></a>
-                            <div class="topNav_menu_bd" style="display:none;" >
+                            <div class="topNav_menu_bd" style="display:none;">
                                 <ul>
                                     <li><a title="已买到的商品" target="_top" href="#">已买到的商品</a></li>
                                     <li><a title="个人主页" target="_top" href="#">个人主页</a></li>
@@ -97,7 +99,9 @@
 
     <!-- TopHeader Center -->
     <div class="shop_hd_header">
-        <div class="shop_hd_header_logo"><h1 class="logo"><a href="/"><img src="images/logo.png" alt="ShopCZ" /></a><span>ShopCZ</span></h1></div>
+        <div class="shop_hd_header_logo"><h1 class="logo"><a href="/"><img src="images/logo.png"
+                                                                           alt="ShopCZ"/></a><span>ShopCZ</span></h1>
+        </div>
         <div class="shop_hd_header_search">
             <ul class="shop_hd_header_search_tab">
                 <li id="search" class="current">商品</li>
@@ -107,8 +111,8 @@
             <div class="search_form">
                 <form method="post" action="index.php">
                     <div class="search_formstyle">
-                        <input type="text" class="search_form_text" name="search_content" value="搜索其实很简单！" />
-                        <input type="submit" class="search_form_sub" name="secrch_submit" value="" title="搜索" />
+                        <input type="text" class="search_form_text" name="search_content" value="搜索其实很简单！"/>
+                        <input type="submit" class="search_form_sub" name="secrch_submit" value="" title="搜索"/>
                     </div>
                 </form>
             </div>
@@ -130,8 +134,10 @@
     <div class="shop_hd_menu">
         <!-- 所有商品菜单 -->
 
-        <div id="shop_hd_menu_all_category" class="shop_hd_menu_all_category"><!-- 首页去掉 id="shop_hd_menu_all_category" 加上clsss shop_hd_menu_hover -->
-            <div class="shop_hd_menu_all_category_title"><h2 title="所有商品分类"><a href="javascript:void(0);">所有商品分类</a></h2><i></i></div>
+        <div id="shop_hd_menu_all_category" class="shop_hd_menu_all_category">
+            <!-- 首页去掉 id="shop_hd_menu_all_category" 加上clsss shop_hd_menu_hover -->
+            <div class="shop_hd_menu_all_category_title"><h2 title="所有商品分类"><a href="javascript:void(0);">所有商品分类</a>
+            </h2><i></i></div>
             <div id="shop_hd_menu_all_category_hd" class="shop_hd_menu_all_category_hd">
                 <ul class="shop_hd_menu_all_category_hd_menu clearfix">
                     <li class="more"><a href="">查看更多分类</a></li>
@@ -178,75 +184,78 @@
     <div class="shop_goods_show">
         <div class="shop_goods_show_left">
             <!-- 京东商品展示 -->
-            <link rel="stylesheet" href="css/shop_goodPic.css" type="text/css" />
+            <link rel="stylesheet" href="css/shop_goodPic.css" type="text/css"/>
             <script type="text/javascript" src="js/shop_goodPic_base.js"></script>
             <script type="text/javascript" src="js/lib.js"></script>
             <script type="text/javascript" src="js/163css.js"></script>
             <div id="preview">
-                <div class=jqzoom id="spec-n1" onClick="window.open('/')"><IMG height="350" src="http://192.168.226.130/${goods.gimage}" jqimg="http://192.168.226.130/${goods.gimage}" width="350">
+                <div class=jqzoom id="spec-n1" onClick="window.open('/')"><IMG height="350"
+                                                                               src="http://192.168.131.128/${goods.gimage}"
+                                                                               jqimg="http://192.168.131.128/${goods.gimage}"
+                                                                               width="350">
                 </div>
                 <div id="spec-n5">
                     <div class=control id="spec-left">
-                        <img src="images/left.gif" />
+                        <img src="images/left.gif"/>
                     </div>
                     <div id="spec-list">
                         <ul class="list-h">
-                            <li><img src="images/img01.jpg"> </li>
-                            <li><img src="images/img02.jpg"> </li>
-                            <li><img src="images/img03.jpg"> </li>
-                            <li><img src="images/img04.jpg"> </li>
-                            <li><img src="images/img01.jpg"> </li>
-                            <li><img src="images/img02.jpg"> </li>
-                            <li><img src="images/img03.jpg"> </li>
-                            <li><img src="images/img04.jpg"> </li>
-                            <li><img src="images/img01.jpg"> </li>
-                            <li><img src="images/img02.jpg"> </li>
-                            <li><img src="images/img03.jpg"> </li>
-                            <li><img src="images/img04.jpg"> </li>
+                            <li><img src="images/img01.jpg"></li>
+                            <li><img src="images/img02.jpg"></li>
+                            <li><img src="images/img03.jpg"></li>
+                            <li><img src="images/img04.jpg"></li>
+                            <li><img src="images/img01.jpg"></li>
+                            <li><img src="images/img02.jpg"></li>
+                            <li><img src="images/img03.jpg"></li>
+                            <li><img src="images/img04.jpg"></li>
+                            <li><img src="images/img01.jpg"></li>
+                            <li><img src="images/img02.jpg"></li>
+                            <li><img src="images/img03.jpg"></li>
+                            <li><img src="images/img04.jpg"></li>
                         </ul>
                     </div>
                     <div class=control id="spec-right">
-                        <img src="images/right.gif" />
+                        <img src="images/right.gif"/>
                     </div>
 
                 </div>
             </div>
 
             <SCRIPT type=text/javascript>
-                $(function(){
+                $(function () {
                     $(".jqzoom").jqueryzoom({
-                        xzoom:400,
-                        yzoom:400,
-                        offset:10,
-                        position:"right",
-                        preload:1,
-                        lens:1
+                        xzoom: 400,
+                        yzoom: 400,
+                        offset: 10,
+                        position: "right",
+                        preload: 1,
+                        lens: 1
                     });
                     $("#spec-list").jdMarquee({
-                        deriction:"left",
-                        width:350,
-                        height:56,
-                        step:2,
-                        speed:4,
-                        delay:10,
-                        control:true,
-                        _front:"#spec-right",
-                        _back:"#spec-left"
+                        deriction: "left",
+                        width: 350,
+                        height: 56,
+                        step: 2,
+                        speed: 4,
+                        delay: 10,
+                        control: true,
+                        _front: "#spec-right",
+                        _back: "#spec-left"
                     });
-                    $("#spec-list img").bind("mouseover",function(){
-                        var src=$(this).attr("src");
+                    $("#spec-list img").bind("mouseover", function () {
+                        var src = $(this).attr("src");
                         $("#spec-n1 img").eq(0).attr({
-                            src:src.replace("\/n5\/","\/n1\/"),
-                            jqimg:src.replace("\/n5\/","\/n0\/")
+                            src: src.replace("\/n5\/", "\/n1\/"),
+                            jqimg: src.replace("\/n5\/", "\/n0\/")
                         });
                         $(this).css({
-                            "border":"2px solid #ff6600",
-                            "padding":"1px"
+                            "border": "2px solid #ff6600",
+                            "padding": "1px"
                         });
-                    }).bind("mouseout",function(){
+                    }).bind("mouseout", function () {
                         $(this).css({
-                            "border":"1px solid #ccc",
-                            "padding":"2px"
+                            "border": "1px solid #ccc",
+                            "padding": "2px"
                         });
                     });
                 })
@@ -277,13 +286,28 @@
                 </li>
                 <li class="goods_num">
                     <label>购买数量：</label>
-                    <span><a class="good_num_jian" id="good_num_jian" href="javascript:void(0);"></a><input type="text" value="1" id="good_nums" class="good_nums" /><a href="javascript:void(0);" id="good_num_jia" class="good_num_jia"></a>(当前库存0件)</span>
+                    <span><a class="good_num_jian" id="good_num_jian" href="javascript:void(0);"></a><input type="text"
+                                                                                                            value="1"
+                                                                                                            id="good_nums"
+                                                                                                            class="good_nums"/><a
+                            href="javascript:void(0);" id="good_num_jia" class="good_num_jia"></a>(当前库存0件)</span>
                 </li>
                 <li style="padding:20px 0;">
                     <label>&nbsp;</label>
-                    <span><a href="" class="goods_sub goods_sub_gou" >加入购物车</a></span>
+                    <span><a href="javascript:addCart();" class="goods_sub goods_sub_gou">加入购物车</a></span>
                 </li>
             </ul>
+
+            <script type="text/javascript">
+                function addCart() {
+                    // 保存到购物车的时候，通过获取商品的id和商品的数量进行保存
+                    // freemarker模版中，可以直接通过EL表达式获取到goods的数据
+                    var gid =  ${goods.id};
+                    var gnumber = $("#good_nums").val();
+                    // 未登录时，将购物车存放在cookie当中
+                    location.href = "http://localhost:8086/cart/addCart?gid=" + gid + "&gnumber=" + gnumber;
+                }
+            </script>
         </div>
     </div>
     <!-- 商品展示 End -->
@@ -324,7 +348,8 @@
 
                     <li class="clearfix">
                         <div class="goods_name"><a href="">Gap经典弹力纯色长袖T恤|000891347|原价149元</a></div>
-                        <div class="goods_pic"><span class="goods_price">¥ 279.00 </span><a href=""><img src="images/89a6d6466b00ae32d3c826b9ec639084.jpg_small.jpg" /></a></div>
+                        <div class="goods_pic"><span class="goods_price">¥ 279.00 </span><a href=""><img
+                                src="images/89a6d6466b00ae32d3c826b9ec639084.jpg_small.jpg"/></a></div>
                         <div class="goods_xiaoliang">
                             <span class="goods_xiaoliang_link"><a href="">去看看</a></span>
                             <span class="goods_xiaoliang_nums">已销售<strong>99</strong>笔</span>
@@ -333,7 +358,8 @@
 
                     <li class="clearfix">
                         <div class="goods_name"><a href="">Gap经典弹力纯色长袖T恤|000891347|原价149元</a></div>
-                        <div class="goods_pic"><span class="goods_price">¥ 279.00 </span><a href=""><img src="images/89a6d6466b00ae32d3c826b9ec639084.jpg_small.jpg" /></a></div>
+                        <div class="goods_pic"><span class="goods_price">¥ 279.00 </span><a href=""><img
+                                src="images/89a6d6466b00ae32d3c826b9ec639084.jpg_small.jpg"/></a></div>
                         <div class="goods_xiaoliang">
                             <span class="goods_xiaoliang_link"><a href="">去看看</a></span>
                             <span class="goods_xiaoliang_nums">已销售<strong>99</strong>笔</span>
@@ -342,7 +368,8 @@
 
                     <li class="clearfix">
                         <div class="goods_name"><a href="">Gap经典弹力纯色长袖T恤|000891347|原价149元</a></div>
-                        <div class="goods_pic"><span class="goods_price">¥ 279.00 </span><a href=""><img src="images/89a6d6466b00ae32d3c826b9ec639084.jpg_small.jpg" /></a></div>
+                        <div class="goods_pic"><span class="goods_price">¥ 279.00 </span><a href=""><img
+                                src="images/89a6d6466b00ae32d3c826b9ec639084.jpg_small.jpg"/></a></div>
                         <div class="goods_xiaoliang">
                             <span class="goods_xiaoliang_link"><a href="">去看看</a></span>
                             <span class="goods_xiaoliang_nums">已销售<strong>99</strong>笔</span>
@@ -363,7 +390,8 @@
 
                     <li class="clearfix">
                         <div class="goods_name"><a href="">Gap经典弹力纯色长袖T恤|000891347|原价149元</a></div>
-                        <div class="goods_pic"><span class="goods_price">¥ 279.00 </span><a href=""><img src="images/89a6d6466b00ae32d3c826b9ec639084.jpg_small.jpg" /></a></div>
+                        <div class="goods_pic"><span class="goods_price">¥ 279.00 </span><a href=""><img
+                                src="images/89a6d6466b00ae32d3c826b9ec639084.jpg_small.jpg"/></a></div>
                         <div class="goods_xiaoliang">
                             <span class="goods_xiaoliang_link"><a href="">去看看</a></span>
                             <span class="goods_xiaoliang_nums">已销售<strong>99</strong>笔</span>
@@ -372,7 +400,8 @@
 
                     <li class="clearfix">
                         <div class="goods_name"><a href="">Gap经典弹力纯色长袖T恤|000891347|原价149元</a></div>
-                        <div class="goods_pic"><span class="goods_price">¥ 279.00 </span><a href=""><img src="images/89a6d6466b00ae32d3c826b9ec639084.jpg_small.jpg" /></a></div>
+                        <div class="goods_pic"><span class="goods_price">¥ 279.00 </span><a href=""><img
+                                src="images/89a6d6466b00ae32d3c826b9ec639084.jpg_small.jpg"/></a></div>
                         <div class="goods_xiaoliang">
                             <span class="goods_xiaoliang_link"><a href="">去看看</a></span>
                             <span class="goods_xiaoliang_nums">已销售<strong>99</strong>笔</span>
@@ -381,7 +410,8 @@
 
                     <li class="clearfix">
                         <div class="goods_name"><a href="">Gap经典弹力纯色长袖T恤|000891347|原价149元</a></div>
-                        <div class="goods_pic"><span class="goods_price">¥ 279.00 </span><a href=""><img src="images/89a6d6466b00ae32d3c826b9ec639084.jpg_small.jpg" /></a></div>
+                        <div class="goods_pic"><span class="goods_price">¥ 279.00 </span><a href=""><img
+                                src="images/89a6d6466b00ae32d3c826b9ec639084.jpg_small.jpg"/></a></div>
                         <div class="goods_xiaoliang">
                             <span class="goods_xiaoliang_link"><a href="">去看看</a></span>
                             <span class="goods_xiaoliang_nums">已销售<strong>99</strong>笔</span>
@@ -401,9 +431,15 @@
     <div class="shop_goods_bd_xiangqing clearfix">
         <div class="shop_goods_bd_xiangqing_tab">
             <ul>
-                <li id="xiangqing_tab_1" onmouseover="shop_goods_easytabs('1', '1');" onfocus="shop_goods_easytabs('1', '1');" onclick="return false;"><a href=""><span>商品详情</span></a></li>
-                <li id="xiangqing_tab_2" onmouseover="shop_goods_easytabs('1', '2');" onfocus="shop_goods_easytabs('1', '2');" onclick="return false;"><a href=""><span>商品评论</span></a></li>
-                <li id="xiangqing_tab_3" onmouseover="shop_goods_easytabs('1', '3');" onfocus="shop_goods_easytabs('1', '3');" onclick="return false;"><a href=""><span>商品咨询</span></a></li>
+                <li id="xiangqing_tab_1" onmouseover="shop_goods_easytabs('1', '1');"
+                    onfocus="shop_goods_easytabs('1', '1');" onclick="return false;"><a href=""><span>商品详情</span></a>
+                </li>
+                <li id="xiangqing_tab_2" onmouseover="shop_goods_easytabs('1', '2');"
+                    onfocus="shop_goods_easytabs('1', '2');" onclick="return false;"><a href=""><span>商品评论</span></a>
+                </li>
+                <li id="xiangqing_tab_3" onmouseover="shop_goods_easytabs('1', '3');"
+                    onfocus="shop_goods_easytabs('1', '3');" onclick="return false;"><a href=""><span>商品咨询</span></a>
+                </li>
             </ul>
         </div>
         <div class="shop_goods_bd_xiangqing_content clearfix">

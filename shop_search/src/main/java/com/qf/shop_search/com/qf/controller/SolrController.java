@@ -2,6 +2,7 @@ package com.qf.shop_search.com.qf.controller;
 
 import com.qf.entity.Goods;
 import com.qf.entity.SolrPage;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.SolrQuery;
@@ -150,5 +151,24 @@ public class SolrController {
             model.addAttribute("page",solrPage);
             model.addAttribute("keyword",keyword);
         return "searchlist";
+    }
+
+    @RequestMapping("/delByid")
+    @ResponseBody
+    public Boolean delByid(@RequestBody String id){
+        // 从索引库中把后台删除的商品对应id的索引删除
+        if(id != null && !"".equals(id)){
+            try {
+                System.out.println("接收到id-->" + id);
+                solrClient.deleteById(id);
+                solrClient.commit();
+                return true;
+            } catch (SolrServerException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return false;
     }
 }
