@@ -9,5 +9,7 @@ public interface IAddressService {
 
     List<Address> queryAddress(Integer uid);
 
+    Address queryByid(Integer id);
+
     Address addAddress(Address address);
 }

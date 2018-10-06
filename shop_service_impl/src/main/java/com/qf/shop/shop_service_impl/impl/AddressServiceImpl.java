@@ -20,6 +20,11 @@ public class AddressServiceImpl implements IAddressService {
     }
 
     @Override
+    public Address queryByid(Integer id) {
+        return addressDao.queryAddressByid(id);
+    }
+
+    @Override
     public Address addAddress(Address address) {
         int addressid = addressDao.addAddress(address);
         address.setId(addressid);

@@ -18,4 +18,6 @@ public interface ICartService {
     List<Cart> getCartlist(String cart_token,User user);
 
     List<Cart> queryCartByUidAndGids(Integer uid,Integer[] gid);
+
+    List<Cart> queryCartByCids(Integer[] cid);
 }

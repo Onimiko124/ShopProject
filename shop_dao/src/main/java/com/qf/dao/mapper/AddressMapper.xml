@@ -8,6 +8,10 @@
           select * from address where uid = #{uid}
     </select>
 
+    <select id="queryAddressByid" resultType="address">
+        select * from address where id = #{id}
+    </select>
+
     <insert id="addAddress" useGeneratedKeys="true" keyProperty="id">
         insert into address value(null,#{person},#{address},#{phone},#{code},#{uid},#{isdefault})
     </insert>

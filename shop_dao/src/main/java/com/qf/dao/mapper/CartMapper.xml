@@ -4,6 +4,21 @@
 <!-- 采购的映射文件 -->
 <mapper namespace="com.qf.dao.ICartDao">
 
+    <resultMap id="CartMap" type="cart">
+        <id property="id" column="id"/>
+        <result property="gid" column="gid"/>
+        <result property="gnumber" column="gnumber"/>
+        <result property="uid" column="uid"/>
+
+        <association property="goods" javaType="goods">
+            <id property="id" column="gid"/>
+            <result property="title" column="title"/>
+            <result property="ginfo" column="ginfo"/>
+            <result property="price" column="price"/>
+            <result property="gimage" column="gimage"/>
+        </association>
+    </resultMap>
+
     <select id="queryCartByuid" resultType="cart">
 --     查询该用户的所有购物车信息
           select * from shopcart where uid = #{uid}
@@ -29,6 +44,13 @@
           <foreach collection="gid" item="gid2" open="(" close=")" separator=",">
               #{gid2}
           </foreach>
+    </select>
+
+    <select id="queryCartByCids" resultMap="CartMap">
+        select * from shopcart sc join goods g on sc.gid = g.id where sc.id in
+        <foreach collection="cid" item="cid2" open="(" close=")" separator=",">
+            #{cid2}
+        </foreach>
     </select>
 
 </mapper>

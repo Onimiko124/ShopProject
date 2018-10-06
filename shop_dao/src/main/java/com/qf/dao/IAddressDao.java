@@ -8,5 +8,7 @@ public interface IAddressDao {
 
     List<Address> queryAddress(Integer uid);
 
+    Address queryAddressByid(Integer id);
+
     int addAddress(Address address);
 }

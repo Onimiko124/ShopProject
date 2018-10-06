@@ -43,7 +43,7 @@ public class CartServiceImpl implements ICartService {
 
     @Override
     public int delCartByuid(Integer uid) {
-        return 0;
+        return cartDao.delCart(uid);
     }
 
     @Override
@@ -82,5 +82,12 @@ public class CartServiceImpl implements ICartService {
             carts.get(i).setGoods(goods);
         }
         return carts;
+    }
+
+    @Override
+    public List<Cart> queryCartByCids(Integer[] cid) {
+
+        // 根据购物车的数组id，查询出所有匹配id的购物车
+        return cartDao.queryCartByCids(cid);
     }
 }

@@ -3,9 +3,11 @@ package com.qf.shop_order.com.qf.controller;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.qf.entity.Address;
 import com.qf.entity.Cart;
+import com.qf.entity.Orders;
 import com.qf.entity.User;
 import com.qf.service.IAddressService;
 import com.qf.service.ICartService;
+import com.qf.service.IOrderService;
 import com.qf.util.IsLogin;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +26,9 @@ public class OrderController {
 
     @Reference
     private IAddressService addressService;
+
+    @Reference
+    private IOrderService orderService;
 
     /**
      * 确认并填写订单，跳转到订单页面
@@ -64,11 +69,33 @@ public class OrderController {
         return address1;
     }
 
+    /**
+     * 添加订单
+     * @param aid
+     * @param cid
+     * @return
+     */
     @RequestMapping("/addorder")
     @ResponseBody
-    public String addorder(Integer aid,Integer[] cid) {
+    @IsLogin(tologin = true)
+    public String addorder(Integer aid,Integer[] cid,User user) {
         System.out.println("收货地址的id-->" + aid);
         System.out.println("购物车的cid列表-->" + Arrays.toString(cid));
-        return null;
+        // 添加订单的同时，添加订单详情表
+        String orderid = orderService.addOrderAndOrderDetils(cid, user.getId(), aid);
+        System.out.println("添加订单执行完毕，订单id-->" + orderid);
+        // 返回orderid
+        return orderid;
+    }
+
+    @IsLogin
+    @RequestMapping("/orderlist")
+    public String orderlist(User user,Model model) {
+        // 交易完毕后，跳转到订单列表页面
+        // 查询该用户所有的订单信息
+        List<Orders> orders = orderService.queryByUid(user.getId());
+        System.out.println("查询的订单信息--" + orders);
+        model.addAttribute("orders",orders);
+        return "orderlist";
     }
 }

@@ -397,7 +397,13 @@
                         traditional:true,
                         data:{aid:aid, cid:array},
                         success:function(data){
-
+                            // 接受到订单id
+                            alert(data)
+                            if(data != null) {
+                                //alert("orderid不为空")
+                                // 跳转到支付工程
+                                location.href = "http://localhost:8089/pay/alipay?orderid=" + data;
+                            }
                         }
                     });
                 }

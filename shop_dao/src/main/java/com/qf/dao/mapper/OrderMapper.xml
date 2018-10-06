@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 采购的映射文件 -->
+<mapper namespace="com.qf.dao.IOrderDao">
+
+    <select id="queryByOrderid" resultType="orders">
+          select * from orders where orderid = #{orderid}
+    </select>
+
+    <insert id="addOrder" useGeneratedKeys="true" keyProperty="id">
+        insert into orders value(null,#{orderid},#{uid},#{person},#{address},#{phone},#{code},#{oprice},#{status},#{ordertime})
+    </insert>
+
+    <insert id="addOrderDetils">
+        insert into orderdetils values
+        <foreach collection="orderdetils" item="orderdetil" separator=",">
+            (null,#{orderdetil.oid},#{orderdetil.gid},#{orderdetil.gname},#{orderdetil.ginfo},#{orderdetil.price},#{orderdetil.gcount},#{orderdetil.gimage})
+        </foreach>
+    </insert>
+
+    <update id="updateStatusByOrderid">
+        update orders set status = #{status} where orderid = #{orderid}
+    </update>
+
+    <select id="queryByUid" resultType="orders">
+        select * from orders where uid = #{uid}
+    </select>
+
+</mapper>
+

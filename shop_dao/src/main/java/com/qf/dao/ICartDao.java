@@ -14,4 +14,6 @@ public interface ICartDao {
     List<Cart> queryCartByuid(Integer uid);
 
     List<Cart> queryCartByUidAndGids(@Param("uid") Integer uid, @Param("gid") Integer[] gid);
+
+    List<Cart> queryCartByCids(@Param("cid") Integer[] cid);
 }

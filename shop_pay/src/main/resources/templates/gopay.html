@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script th:inline="javascript">
+        window.onload = function(){
+            // 页面加载完毕时，发送请求查询订单id对应的总金额和状态，打开新页面跳转到支付宝的支付页面
+            window.open("http://localhost:8089/pay/goalipay?orderid=" + [[${orderid}]],"_blank");
+        }
+
+        function payok(){
+            location.href = "http://localhost:8089/pay/isok?orderid=" + [[${orderid}]];
+        }
+    </script>
+</head>
+<body >
+    <h1>正在支付</h1>
+    <input th:value="${orderid}" id="orderid" type="hidden" />
+    <button onclick="payok();">支付已经完成</button>
+    <button>支付遇到问题？</button>
+</body>
+</html>
