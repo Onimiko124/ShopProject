@@ -1,0 +1,11 @@
+server:
+  port: 8089
+dubbo:
+  application:
+    name: shop_pay
+  registry:
+    address: zookeeper://192.168.131.128:2181
+    check: false
+  consumer:
+    check: false
+    timeout: 1000
